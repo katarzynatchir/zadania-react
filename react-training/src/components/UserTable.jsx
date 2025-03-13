@@ -1,13 +1,30 @@
+import { useEffect, useState } from 'react';
+
 const usersData = [
-  { id: 1, name: "Anna" },
-  { id: 2, name: "Jan" },
-  { id: 3, name: "Olga" },
+  { id: 1, name: 'Anna' },
+  { id: 2, name: 'Jan' },
+  { id: 3, name: 'Olga' },
 ];
 
 const UsersTable = () => {
+  const [filter, setFilter] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState(usersData);
+
+  useEffect(() => {
+    const updatedUsers = usersData.filter(user =>
+      user.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+    setFilteredUsers(updatedUsers);
+  }, [filter]);
+
   return (
     <div>
-      <input type="text" placeholder="Filtruj po imieniu..." />
+      <input
+        type="text"
+        placeholder="Filtruj po imieniu..."
+        value={filter}
+        onChange={e => setFilter(e.target.value)}
+      />
       <table>
         <thead>
           <tr>
@@ -16,7 +33,7 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {usersData.map(({ id, name }) => (
+          {filteredUsers.map(({ id, name }) => (
             <tr key={id}>
               <td>{id}</td>
               <td>{name}</td>
@@ -27,4 +44,5 @@ const UsersTable = () => {
     </div>
   );
 };
+
 export default UsersTable;
