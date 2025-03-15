@@ -17,6 +17,15 @@ const UsersTable = () => {
     setFilteredUsers(updatedUsers);
   }, [filter]);
 
+  //Bez UseEffect
+  // const handleSearch = e => {
+  //   setFilter(e.target.value);
+  //   const updatedUsers = usersData.filter(user =>
+  //     user.name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
+  //   setFilteredUsers(updatedUsers);
+  // };
+
   return (
     <div>
       <input
@@ -24,6 +33,7 @@ const UsersTable = () => {
         placeholder="Filtruj po imieniu..."
         value={filter}
         onChange={e => setFilter(e.target.value)}
+        // onChange={e => handleSearch(e)}
       />
       <table>
         <thead>
